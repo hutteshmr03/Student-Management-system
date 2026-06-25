@@ -3,10 +3,11 @@ import axios from 'axios'
 // In dev: Vite proxies /api → localhost:8000
 // In production: FastAPI serves React build, so /api hits the same server
 const api = axios.create({
-  baseURL: '/api',
-  headers: { 'Content-Type': 'application/json' }
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
+  headers: {
+    "Content-Type": "application/json",
+  },
 })
-
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   if (token) config.headers.Authorization = `Bearer ${token}`
