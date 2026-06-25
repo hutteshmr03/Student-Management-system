@@ -21,6 +21,14 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Student DBMS API", version="2.0.0")
 
+@app.get("/")
+def root():
+    return {"message": "Student Management API Running"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
